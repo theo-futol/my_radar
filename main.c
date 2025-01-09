@@ -114,6 +114,7 @@ static int my_radar(char *path)
         close_window(&main);
         return 84;
     }
+    sfRenderWindow_setMouseCursorVisible(main.wind.wind, sfFalse);
     for (; sfRenderWindow_isOpen(main.wind.wind); manage_event(&main)){
         move_planes(&main);
         if (init_qt(&main) == 84)

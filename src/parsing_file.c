@@ -124,8 +124,10 @@ static int open_file(char *path, main_struct_t *data)
         return 84;
     for (ssize_t byte = getline(&line, &len, stream); byte != -1; byte =
         getline(&line, &len, stream)){
-        if (line == NULL)
+        if (line == NULL){
+            fclose(stream);
             return 84;
+        }
         array = my_str_to_word_array(line, my_strlen(line) + 1);
         if (array == NULL || add_to_list(data, line, array) == 84){
             free_all(line, stream, array);
