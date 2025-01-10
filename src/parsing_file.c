@@ -113,15 +113,12 @@ static void free_all(char *line, FILE *stream, char **array)
     }
 }
 
-static int open_file(char *path, main_struct_t *data)
+static int open_file(FILE *stream, main_struct_t *data)
 {
-    FILE *stream = fopen(path, "r");
     char *line = NULL;
     size_t len = 0;
     char **array = NULL;
 
-    if (stream == NULL)
-        return 84;
     for (ssize_t byte = getline(&line, &len, stream); byte != -1; byte =
         getline(&line, &len, stream)){
         if (line == NULL){
@@ -140,7 +137,11 @@ static int open_file(char *path, main_struct_t *data)
 
 int parsing_file(char *path, main_struct_t *main)
 {
-    if (open_file(path, main) == 84)
+    FILE *stream = fopen(path, "r");
+
+    if (stream == NULL)
+        return 84;
+    if (open_file(stream, main) == 84)
         return 84;
     return 0;
 }

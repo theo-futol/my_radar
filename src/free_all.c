@@ -23,13 +23,17 @@ void close_window(main_struct_t *data)
 {
     free_main(data);
     for (int i = 0; i < data->len_towers; i++){
-        sfCircleShape_destroy(data->all_towers[i].circle);
-        sfSprite_destroy(data->all_towers[i].tower_sprt);
+        if (data->all_towers[i].circle != NULL)
+            sfCircleShape_destroy(data->all_towers[i].circle);
+        if (data->all_towers[i].tower_sprt != NULL)
+            sfSprite_destroy(data->all_towers[i].tower_sprt);
     }
     for (int i = 0; i < data->len_planes; i++)
-        sfRectangleShape_destroy(data->all_planes[i].rec);
+        if (data->all_planes[i].rec != NULL)
+            sfRectangleShape_destroy(data->all_planes[i].rec);
     for (int i = 0; i < data->len_qt; i++){
-        sfRectangleShape_destroy(data->my_qt[i].rec);
+        if (data->my_qt[i].rec != NULL)
+            sfRectangleShape_destroy(data->my_qt[i].rec);
         free(data->my_qt[i].id);
     }
     free(data->my_qt);
