@@ -22,7 +22,7 @@ static float get_dist_p(planes_t p1, planes_t p2)
 static int is_in_tower(planes_t p1, planes_t p2, main_struct_t main)
 {
     for (int i = 0; i < main.len_towers; i++)
-        if (get_dist_t(p1, main.all_towers[i]) < main.all_towers[i].radius &&
+        if (get_dist_t(p1, main.all_towers[i]) < main.all_towers[i].radius ||
             get_dist_t(p2, main.all_towers[i]) < main.all_towers[i].radius)
             return 1;
     return 0;
